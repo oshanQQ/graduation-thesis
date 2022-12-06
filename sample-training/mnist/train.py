@@ -1,8 +1,18 @@
 # ライブラリのインポート
+import wandb
+from wandb.keras import WandbCallback
 import numpy as np
 from keras.datasets import mnist
 from keras.models import Model
 from keras.layers import Input, Dense
+
+# wandbの初期化
+wandb.init(project="my-test-project")
+wandb.config = {
+  "learning_rate": 0.001,
+  "epochs": 100,
+  "batch_size": 128
+}
 
 # MNISTのトレーニングデータとテストデータを用意
 (x_train, _), (x_test, _) = mnist.load_data()
@@ -18,8 +28,9 @@ decoded = Dense(784, activation='sigmoid')(encoded)
 autoencoder = Model(input_img, decoded)
 
 # モデルをコンパイルして学習させる
+# wandbコールバック関数を指定して、学習中のGPUの状態を記録していく
 autoencoder.compile(optimizer='adam', loss='binary_crossentropy')
-autoencoder.fit(x_train, x_train, epochs=50, batch_size=256, shuffle=True)
+autoencoder.fit(x_train, x_train, epochs=50, batch_size=256, shuffle=True, callbacks=[WandbCallback()])
 
 # 学習済みのモデルを使って、テストデータを検証する
 decoded_imgs = autoencoder.predict(x_test)
@@ -44,4 +55,4 @@ for i in range(n):
     plt.gray()
     ax.get_xaxis().set_visible(False)
     ax.get_yaxis().set_visible(False)
-plt.show()
+plt.savefig("mnist_result.png")
