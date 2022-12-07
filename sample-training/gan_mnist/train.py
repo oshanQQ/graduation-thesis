@@ -67,7 +67,7 @@ X_train = np.expand_dims(X_train, axis=3)
 batch_size = 64
 
 # 無限ループで学習
-for epoch in range(10000):
+for epoch in range(50000):
     # ランダムなノイズを生成
     noise = np.random.normal(0, 1, (batch_size, noise_dim))
     
