@@ -67,7 +67,7 @@ X_train = np.expand_dims(X_train, axis=3)
 batch_size = 64
 
 # 無限ループで学習
-for epoch in range(10000):
+for epoch in range(1000):
     # ランダムなノイズを生成
     noise = np.random.normal(0, 1, (batch_size, noise_dim))
     
@@ -97,3 +97,14 @@ for epoch in range(10000):
     # 進捗を出力
     if epoch % 100 == 0:
         print("epoch: {}, g_loss: {}, d_loss: {}".format(epoch, g_loss, d_loss))
+
+# ランダムなノイズを生成
+noise = np.random.normal(0, 1, (batch_size, noise_dim))
+
+# 生成モデルを使用して画像を生成
+generated_images = generator.predict(noise)
+
+# 生成された画像を表示
+import matplotlib.pyplot as plt
+plt.imshow(generated_images[0, :, :, 0], cmap="gray")
+plt.savefig("mnist_result.png")
