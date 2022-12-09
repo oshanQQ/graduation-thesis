@@ -7,11 +7,10 @@ from keras.models import Model
 from keras.layers import Input, Dense
 
 # wandbの初期化
-wandb.init(project="my-test-project")
+wandb.init(project="autoencoder-mnist")
 wandb.config = {
-  "learning_rate": 0.001,
-  "epochs": 100,
-  "batch_size": 128
+  "epochs": 500,
+  "batch_size": 256
 }
 
 # MNISTのトレーニングデータとテストデータを用意
@@ -30,7 +29,7 @@ autoencoder = Model(input_img, decoded)
 # モデルをコンパイルして学習させる
 # wandbコールバック関数を指定して、学習中のGPUの状態を記録していく
 autoencoder.compile(optimizer='adam', loss='binary_crossentropy')
-autoencoder.fit(x_train, x_train, epochs=50, batch_size=256, shuffle=True, callbacks=[WandbCallback()])
+autoencoder.fit(x_train, x_train, epochs=500, batch_size=256, shuffle=True, callbacks=[WandbCallback()])
 
 # 学習済みのモデルを使って、テストデータを検証する
 decoded_imgs = autoencoder.predict(x_test)
