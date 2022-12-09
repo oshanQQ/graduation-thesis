@@ -1,3 +1,5 @@
+import wandb
+from wandb.keras import WandbCallback
 import keras
 from keras.datasets import mnist
 from keras.layers import Input, Dense, Reshape, Flatten, Dropout
@@ -7,6 +9,13 @@ from keras.layers.convolutional import UpSampling2D, Conv2D
 from keras.models import Sequential, Model
 from tensorflow.keras.optimizers import Adam
 import numpy as np
+
+# wandbの初期化
+wandb.init(project="gan_mnist")
+wandb.config = {
+  "epochs": 50000,
+  "batch_size": 64
+}
 
 # MNISTデータセットを読み込む
 (X_train, _), (_, _) = mnist.load_data()
@@ -96,7 +105,8 @@ for epoch in range(50000):
 
     # 進捗を出力
     if epoch % 100 == 0:
-        print("epoch: {}, g_loss: {}, d_loss: {}".format(epoch, g_loss, d_loss))
+        print("epoch: {}, g_loss: {}, d_loss: {}".format(epoch, g_loss, d_loss[0]))
+        wandb.log({"epoch": epoch, "g_loss": g_loss, "d_loss": d_loss[0]})
 
 # ランダムなノイズを生成
 noise = np.random.normal(0, 1, (batch_size, noise_dim))
