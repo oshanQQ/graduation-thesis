@@ -1,3 +1,5 @@
+import wandb
+from wandb.keras import WandbCallback
 import pandas as pd
 from sklearn.model_selection import train_test_split
 from keras.preprocessing.text import Tokenizer
@@ -6,7 +8,13 @@ from keras.models import Sequential
 from keras.layers import LSTM, Dense, Embedding
 from sklearn.metrics import confusion_matrix
 
-epoch = 10
+epoch = 100
+
+# wandbの初期化
+wandb.init(project="naive_bayes_spam_classification")
+wandb.config = {
+  "epochs": epoch
+}
 
 pd.set_option("display.max_colwidth", 100)
 
@@ -52,7 +60,8 @@ y_test = Y_test['category'].values
 # 学習
 history = model.fit(
     x_train, y_train, batch_size=32, epochs=epoch,
-    validation_data=(x_test, y_test)
+    validation_data=(x_test, y_test),
+    callbacks=[WandbCallback()]
 )
 
 y_pred = model.predict(x_test)
