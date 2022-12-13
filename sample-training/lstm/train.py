@@ -5,7 +5,7 @@ import numpy as np
 import math
 import random
 
-epoch = 15
+epoch = 500
 
 # wandbの初期化
 wandb.init(project="lstm-sin-wave")
