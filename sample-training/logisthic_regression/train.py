@@ -1,8 +1,18 @@
+import wandb
+from wandb.keras import WandbCallback
 import numpy as np
 from keras.datasets import mnist
 from keras.models import Sequential 
 from keras.layers import Dense, Activation 
-from keras.utils import np_utils 
+from keras.utils import np_utils
+
+nb_epoch = 40
+
+# wandbの初期化
+wandb.init(project="logistic-regression-mnist")
+wandb.config = {
+  "epochs": nb_epoch,
+}
 
 (X_train, y_train), (X_test, y_test) = mnist.load_data()
 
@@ -50,8 +60,7 @@ model.compile(optimizer='sgd', loss='categorical_crossentropy', metrics=['accura
 # Train the model for 40 epochs, displaying progress (verbose=1) and
 # recording performance on the validation. Store record of training
 # in variable "history".
-nb_epoch = 40
-history = model.fit(X_train_flat, y_train_one_hot, epochs=nb_epoch, verbose=1, validation_data=(X_val_flat, y_val_one_hot))
+history = model.fit(X_train_flat, y_train_one_hot, epochs=nb_epoch, verbose=1, validation_data=(X_val_flat, y_val_one_hot), callbacks=[WandbCallback()])
 
 # Test the trained model on the test set
 score = model.evaluate(X_test_flat, y_test_one_hot, verbose=0) 
