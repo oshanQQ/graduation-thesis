@@ -1,7 +1,17 @@
+import wandb
+from wandb.keras import WandbCallback
 import pandas as pd
 import numpy as np
 import math
 import random
+
+epoch = 15
+
+# wandbの初期化
+wandb.init(project="lstm-sin-wave")
+wandb.config = {
+  "epochs": epoch
+}
 
 random.seed(0)
 # 乱数の係数
@@ -55,4 +65,4 @@ model.add(LSTM(hidden_neurons, batch_input_shape=(None, length_of_sequences, in_
 model.add(Dense(in_out_neurons))  
 model.add(Activation("linear"))  
 model.compile(loss="mean_squared_error", optimizer="rmsprop")
-model.fit(X_train, y_train, batch_size=600, epochs=15, validation_split=0.05) 
+model.fit(X_train, y_train, batch_size=600, epochs=epoch, validation_split=0.05, callbacks=[WandbCallback()]) 
