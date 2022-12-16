@@ -1,6 +1,17 @@
+import wandb
+from wandb.keras import WandbCallback
 import numpy as np
 from tensorflow import keras
 from tensorflow.keras.datasets import mnist
+
+TEST_EPOCH = 10
+PRODUCTION_EPOCH = 100
+
+# wandbの初期化
+wandb.init(project="cnn_classify_mnist")
+wandb.config = {
+  "epochs": PRODUCTION_EPOCH
+}
 
 (train_images, train_labels), (test_images, test_labels) = mnist.load_data()
 
@@ -15,7 +26,7 @@ model.compile(optimizer='adam',
 model.summary()
 
 print("\n◆Train:")
-model.fit(train_images, train_labels, epochs=10)
+model.fit(train_images, train_labels, epochs=PRODUCTION_EPOCH, callbacks=[WandbCallback()])
 print("Done")
 
 print("\n◆Predict:")
