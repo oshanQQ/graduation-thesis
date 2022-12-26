@@ -2,6 +2,32 @@ kind: Cluster
 apiVersion: kind.x-k8s.io/v1alpha4
 nodes:
 - role: control-plane
+  image: kindest/node:v1.25.3
+  extraMounts:
+  - hostPath: /dev/nvidia0
+    containerPath: /dev/nvidia0
+  - hostPath: /dev/nvidiactl
+    containerPath: /dev/nvidiactl
+  - hostPath: /dev/nvidia-uvm
+    containerPath: /dev/nvidia-uvm
+  - hostPath: /usr/lib/x86_64-linux-gnu/libcuda.so
+    containerPath: /usr/lib/x86_64-linux-gnu/libcuda.so
+  - hostPath: /usr/lib/x86_64-linux-gnu/libnvidia-ml.so
+    containerPath: /usr/lib/x86_64-linux-gnu/libnvidia-ml.so
+  - hostPath: /usr/bin/nvidia-smi
+    containerPath: /usr/bin/nvidia-smi
+  - hostPath: /usr/lib/nvidia
+    containerPath: /usr/lib/nvidia
 - role: worker
-- role: worker
-- role: worker
+  image: kindest/node:v1.25.3
+  extraMounts:
+  - hostPath: /dev/nvidia0
+    containerPath: /dev/nvidia0
+  - hostPath: /dev/nvidiactl
+    containerPath: /dev/nvidiactl
+  - hostPath: /dev/nvidia-uvm
+    containerPath: /dev/nvidia-uvm
+  - hostPath: /usr/lib/x86_64-linux-gnu/libcuda.so
+    containerPath: /usr/lib/x86_64-linux-gnu/libcuda.so
+  - hostPath: /usr/lib/x86_64-linux-gnu/libnvidia-ml.so
+    containerPath: /usr/lib/x86_64-linux-gnu/lib
