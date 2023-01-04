@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: tens-pod
+spec:
+  containers:
+    - name: tens-container
+      image: tensorflow/tensorflow:latest-gpu-py3
+      command: ["/bin/sleep"]
+      args: ["3600"]
+      resources:
+        limits:
+          nvidia.com/gpu: 1
