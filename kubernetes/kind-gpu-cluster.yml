@@ -5,3 +5,5 @@ nodes:
   - role: control-plane
   - role: worker
     gpus: True
+  - role: worker
+    gpus: True
