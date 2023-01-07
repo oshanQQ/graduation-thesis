@@ -1,10 +1,10 @@
 apiVersion: v1
 kind: Pod
 metadata:
-  name: tens-pod
+  name: tensorflow-pod
 spec:
   containers:
-    - name: tens-container
+    - name: tensorflow-container
       image: tensorflow/tensorflow:latest-gpu-py3
       command: ["/bin/sleep"]
       args: ["3600"]
