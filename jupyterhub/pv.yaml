@@ -7,8 +7,9 @@ spec:
     storage: 1Gi
   accessModes:
   - ReadWriteOnce
+  volumeMode: Filesystem
   persistentVolumeReclaimPolicy: Retain
-  storageClassName: local-storage
+  storageClassName: local-strage
   local:
     path: /mnt/disks/vol1
   nodeAffinity:
