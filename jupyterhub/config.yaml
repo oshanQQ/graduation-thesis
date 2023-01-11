@@ -9,29 +9,8 @@
 # Available chart versions: https://jupyterhub.github.io/helm-chart/
 #
 
-# singleuser:
-#   storage:
-#     capacity: 1Gi
-#     dynamic:
-#       storageClass: local-strage
-
-# singleuser:
-#   storage:
-#     capacity: 1Gi
-#     extraVolumes:
-#       - name: local-claim
-#         persistentVolumeClaim:
-#           claimName: local-claim
-#     extraVolumeMounts:
-#       - name: local-claim
-#         mountPath: /mnt/disks/vol1
-
 singleuser:
   storage:
-    type: "static"
-    static:
-      pvcName: "local-claim"
-      subPath: "/mnt/disks/vol1"
-proxy:
-  service:
-    type: ClusterIP
+    capacity: 1Gi
+    dynamic:
+      storageClass: local-storage

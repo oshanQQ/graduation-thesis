@@ -9,7 +9,7 @@ spec:
   - ReadWriteOnce
   volumeMode: Filesystem
   persistentVolumeReclaimPolicy: Retain
-  storageClassName: local-strage
+  storageClassName: local-storage-class
   local:
     path: /mnt/disks/vol1
   nodeAffinity:
