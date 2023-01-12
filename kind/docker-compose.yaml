@@ -7,7 +7,6 @@ services:
       dockerfile: ./Dockerfile
     tty: true
     container_name: kind
-    # privileged: true
+    privileged: true
     volumes:
       - ../:/app/
-      - /var/run/docker.sock:/var/run/docker.sock
