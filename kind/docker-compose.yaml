@@ -1,0 +1,13 @@
+version: '3.7'
+
+services:
+  kind:
+    build:
+      context: ./
+      dockerfile: ./Dockerfile
+    tty: true
+    container_name: kind
+    # privileged: true
+    volumes:
+      - ../:/app/
+      - /var/run/docker.sock:/var/run/docker.sock
