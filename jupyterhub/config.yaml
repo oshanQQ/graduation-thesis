@@ -11,6 +11,6 @@
 
 singleuser:
   storage:
-    capacity: 1Gi
+    capacity: 5Gi
     dynamic:
       storageClass: local-storage-class
