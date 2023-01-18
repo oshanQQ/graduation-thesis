@@ -20,3 +20,5 @@ prePuller:
 proxy:
   service:
     type: ClusterIP
+debug:
+  enabled: true
