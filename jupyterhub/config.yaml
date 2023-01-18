@@ -17,3 +17,6 @@ singleuser:
 prePuller:
   hook:
     enabled: false
+proxy:
+  service:
+    type: ClusterIP
