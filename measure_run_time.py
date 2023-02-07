@@ -41,7 +41,7 @@ def Classify(batch_size, epochs):
         writer.writerow([batch_size, epochs, learning_time, test_loss, test_acc])
 
 
-for batch in range(10, 100):
-    for epoch in range(10, 100):
+for batch in range(10, 101, 10):
+    for epoch in range(10, 101, 10):
         Classify(batch, epoch)
 
