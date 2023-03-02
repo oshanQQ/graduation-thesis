@@ -1,1 +1,3 @@
-# gpu-runtime-estimation
+# graduation-thesis
+
+KubernetesとJupyterHubで構築したGPUクラスタにおける深層学習モデル学習時の学習時間予測
